@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "DroneJS Extension",
+  "version": "1.0.0",
+  "description": "A beautiful bookmark manager extension with keyboard shortcuts",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "commands": {
+    "open-modal": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Open the bookmark manager modal"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["globals.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Bookmark Manager"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

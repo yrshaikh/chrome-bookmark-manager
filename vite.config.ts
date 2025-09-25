@@ -21,6 +21,7 @@ export default defineConfig({
   ],
   build: {
     outDir: 'dist',
+    minify: false,
     rollupOptions: {
       input: {
         background: resolve(__dirname, 'src/background/background.ts'),
@@ -29,8 +30,9 @@ export default defineConfig({
       },
       output: {
         entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        chunkFileNames: 'globals.js',
+        assetFileNames: '[name].[ext]',
+        format: 'es'
       }
     }
   },

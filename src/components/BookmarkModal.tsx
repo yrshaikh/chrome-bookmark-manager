@@ -31,11 +31,11 @@ export const BookmarkModal: React.FC<BookmarkModalProps> = ({ isOpen, onClose })
           <DialogDescription className="text-center text-lg mb-6">
             Welcome to your Chrome Bookmark Manager! This modal was triggered by pressing{' '}
             <kbd className="px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
-              Cmd+Shift+K
+              Cmd+Shift+,
             </kbd>{' '}
             (Mac) or{' '}
             <kbd className="px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">
-              Ctrl+Shift+K
+              Ctrl+Shift+,
             </kbd>{' '}
             (Windows/Linux).
           </DialogDescription>

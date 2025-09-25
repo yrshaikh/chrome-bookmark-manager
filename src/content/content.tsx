@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { BookmarkModal } from '@/components/BookmarkModal';
 import '@/globals.css';
 
+console.log('📂 Chrome Bookmark Manager content script file loaded');
+
 // Create a container for our React app
 const createModalContainer = (): HTMLDivElement => {
   const container = document.createElement('div');
@@ -42,6 +44,7 @@ const ModalManager: React.FC = () => {
     const messageListener = (message: any) => {
       console.log('Content script received message:', message);
       if (message.action === 'open-modal') {
+        alert('Content script received open-modal message!'); // Temporary debugging alert
         setIsModalOpen(true);
       }
     };
@@ -77,7 +80,7 @@ const init = () => {
     const root = createRoot(container);
     root.render(<ModalManager />);
     
-    console.log('Chrome Bookmark Manager content script initialized');
+    console.log('✅ Chrome Bookmark Manager content script initialized and ready');
   } catch (error) {
     console.error('Error initializing Chrome Bookmark Manager:', error);
   }

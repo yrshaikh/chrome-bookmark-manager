@@ -10,8 +10,8 @@
   "commands": {
     "open-modal": {
       "suggested_key": {
-        "default": "Ctrl+Shift+K",
-        "mac": "Command+Shift+K"
+        "default": "Ctrl+Shift+Comma",
+        "mac": "Command+Shift+Comma"
       },
       "description": "Open the bookmark manager modal"
     }
@@ -22,7 +22,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "js": ["globals.js", "content.js"],
       "css": ["globals.css"]
     }
   ],

@@ -5,7 +5,7 @@ A modern Chrome extension built with TypeScript, React, and shadcn/ui components
 ## Features
 
 - 🎨 Modern UI with shadcn/ui components
-- ⌨️ Keyboard shortcuts: `Cmd+Shift+K` (Mac) or `Ctrl+Shift+K` (Windows/Linux)
+- ⌨️ Keyboard shortcuts: `Cmd+Shift+Comma` (Mac) or `Ctrl+Shift+Comma` (Windows/Linux)
 - 🎭 Beautiful modal interface with Nunito Sans font
 - ⚡ Built with TypeScript and React
 - 🎯 Tailwind CSS for styling
@@ -36,8 +36,8 @@ A modern Chrome extension built with TypeScript, React, and shadcn/ui components
 ## Usage
 
 ### Keyboard Shortcut
-- **Mac**: `Cmd+Shift+K`
-- **Windows/Linux**: `Ctrl+Shift+K`
+- **Mac**: `Cmd+Shift+Comma`
+- **Windows/Linux**: `Ctrl+Shift+Comma`
 
 ### Extension Popup
 - Click the extension icon in the Chrome toolbar

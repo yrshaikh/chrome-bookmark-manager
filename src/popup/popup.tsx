@@ -41,13 +41,13 @@ const PopupApp: React.FC = () => {
           <p>💡 Quick access:</p>
           <div className="flex items-center justify-center space-x-1">
             <kbd className="px-1 py-0.5 text-xs font-mono bg-muted rounded">
-              Cmd+Shift+K
+              Cmd+Shift+,
             </kbd>
             <span>(Mac)</span>
           </div>
           <div className="flex items-center justify-center space-x-1">
             <kbd className="px-1 py-0.5 text-xs font-mono bg-muted rounded">
-              Ctrl+Shift+K
+              Ctrl+Shift+,
             </kbd>
             <span>(Windows/Linux)</span>
           </div>

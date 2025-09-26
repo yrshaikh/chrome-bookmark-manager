@@ -5,7 +5,8 @@
   "description": "A beautiful bookmark manager extension with keyboard shortcuts",
   "permissions": [
     "storage",
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "commands": {
     "open-modal": {
@@ -17,13 +18,13 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["globals.js", "content.js"],
-      "css": ["globals.css"]
+      "js": ["test-content.js"]
     }
   ],
   "action": {
@@ -32,7 +33,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["*"],
+      "resources": ["popup.css"],
       "matches": ["<all_urls>"]
     }
   ]

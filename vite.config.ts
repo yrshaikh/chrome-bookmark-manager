@@ -15,6 +15,10 @@ export default defineConfig({
         {
           src: 'popup.html',
           dest: '.'
+        },
+        {
+          src: 'test-content.js',
+          dest: '.'
         }
       ]
     })
@@ -30,7 +34,7 @@ export default defineConfig({
       },
       output: {
         entryFileNames: '[name].js',
-        chunkFileNames: 'globals.js',
+        chunkFileNames: 'shared-[hash].js',
         assetFileNames: '[name].[ext]',
         format: 'es'
       }

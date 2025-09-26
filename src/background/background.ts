@@ -3,7 +3,6 @@ console.log('🚀 Background script loaded and initializing...');
 
 chrome.commands.onCommand.addListener((command) => {
   console.log('🎯 Keyboard command received in background script:', command);
-  alert('Shortcut key pressed: ' + command); // Temporary debugging alert
   
   if (command === 'open-modal') {
     console.log('📋 Processing open-modal command');
@@ -16,6 +15,12 @@ chrome.commands.onCommand.addListener((command) => {
         chrome.tabs.sendMessage(tabs[0].id, { 
           action: 'open-modal',
           command: command 
+        }, (response) => {
+          if (chrome.runtime.lastError) {
+            console.log('⚠️ Error sending message:', chrome.runtime.lastError.message);
+          } else {
+            console.log('✅ Message sent successfully, response:', response);
+          }
         });
       } else {
         console.log('❌ No active tab found');

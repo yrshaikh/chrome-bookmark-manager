@@ -1,9 +1,47 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BookmarkModal } from '@/components/BookmarkModal';
-import '@/globals.css';
+// CSS will be loaded dynamically when modal opens
 
 console.log('📂 Chrome Bookmark Manager content script file loaded');
+
+// Global state for modal
+let globalModalState = {
+  isOpen: false,
+  setIsOpen: null as ((value: boolean) => void) | null
+};
+
+// Load CSS dynamically when needed
+let cssLoaded = false;
+const loadCSS = () => {
+  if (cssLoaded) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = chrome.runtime.getURL('popup.css');
+  document.head.appendChild(link);
+  cssLoaded = true;
+  console.log('🎨 CSS loaded dynamically');
+};
+
+// Set up message listener at top level (outside React)
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log('📨 Content script received message:', message);
+  if (message.action === 'open-modal') {
+    console.log('🔓 Opening modal from message listener');
+    
+    // Load CSS before opening modal
+    loadCSS();
+    
+    globalModalState.isOpen = true;
+    if (globalModalState.setIsOpen) {
+      globalModalState.setIsOpen(true);
+    }
+    sendResponse({success: true}); // Send response back to background script
+  }
+  return true; // Keep message channel open for async response
+});
+
+console.log('📞 Message listener registered at top level');
 
 // Create a container for our React app
 const createModalContainer = (): HTMLDivElement => {
@@ -29,7 +67,16 @@ const createModalContainer = (): HTMLDivElement => {
 
 // React component to manage modal state
 const ModalManager: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(globalModalState.isOpen);
+  
+  // Connect global state to React state
+  React.useEffect(() => {
+    globalModalState.setIsOpen = setIsModalOpen;
+    // Set initial state if modal should be open
+    if (globalModalState.isOpen) {
+      setIsModalOpen(true);
+    }
+  }, []);
   
   // Update pointer events based on modal state
   React.useEffect(() => {
@@ -39,24 +86,8 @@ const ModalManager: React.FC = () => {
     }
   }, [isModalOpen]);
 
-  // Listen for messages from background script
-  React.useEffect(() => {
-    const messageListener = (message: any) => {
-      console.log('Content script received message:', message);
-      if (message.action === 'open-modal') {
-        alert('Content script received open-modal message!'); // Temporary debugging alert
-        setIsModalOpen(true);
-      }
-    };
-
-    chrome.runtime.onMessage.addListener(messageListener);
-    
-    return () => {
-      chrome.runtime.onMessage.removeListener(messageListener);
-    };
-  }, []);
-
   const handleCloseModal = () => {
+    globalModalState.isOpen = false;
     setIsModalOpen(false);
   };
 
